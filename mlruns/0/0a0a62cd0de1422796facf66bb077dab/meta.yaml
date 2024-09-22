@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/0a0a62cd0de1422796facf66bb077dab/artifacts
+end_time: 1726419538787
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 0a0a62cd0de1422796facf66bb077dab
+run_name: salty-jay-613
+run_uuid: 0a0a62cd0de1422796facf66bb077dab
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1726419538669
+status: 3
+tags: []
+user_id: victordias94

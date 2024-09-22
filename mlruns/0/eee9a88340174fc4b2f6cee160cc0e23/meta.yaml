@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/eee9a88340174fc4b2f6cee160cc0e23/artifacts
+end_time: 1726187946663
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: eee9a88340174fc4b2f6cee160cc0e23
+run_name: rumbling-mink-293
+run_uuid: eee9a88340174fc4b2f6cee160cc0e23
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1726187946609
+status: 3
+tags: []
+user_id: victordias94

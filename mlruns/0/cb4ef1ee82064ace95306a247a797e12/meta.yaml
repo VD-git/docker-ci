@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/cb4ef1ee82064ace95306a247a797e12/artifacts
+end_time: 1726415098730
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: cb4ef1ee82064ace95306a247a797e12
+run_name: judicious-smelt-652
+run_uuid: cb4ef1ee82064ace95306a247a797e12
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1726415098478
+status: 3
+tags: []
+user_id: victordias94

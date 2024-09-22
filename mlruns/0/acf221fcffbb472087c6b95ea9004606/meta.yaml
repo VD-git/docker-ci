@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/acf221fcffbb472087c6b95ea9004606/artifacts
+end_time: 1726418851244
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: acf221fcffbb472087c6b95ea9004606
+run_name: enchanting-wren-79
+run_uuid: acf221fcffbb472087c6b95ea9004606
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1726418850992
+status: 3
+tags: []
+user_id: victordias94

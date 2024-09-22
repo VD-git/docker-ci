@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/c92aaaed5013445397b5b06fef39bf45/artifacts
+end_time: 1726419277916
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: c92aaaed5013445397b5b06fef39bf45
+run_name: likeable-goose-403
+run_uuid: c92aaaed5013445397b5b06fef39bf45
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1726419277817
+status: 3
+tags: []
+user_id: victordias94
