@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - "main"
+  pull_request:
+
+permissions:
+  pull-requests: write # needed to create and update comments in PRs
 
 jobs:
   docker:
@@ -60,4 +64,33 @@ jobs:
           # Adiciono as multiplataformas que diferentes usuários podem utilizar para versionar as imagens utilizadas.
           platforms: linux/amd64
           # outputs: ${{ github.event_name == 'pull_request' && 'type=cacheonly' || 'type=registry,push=true' }}
+
+      # Automatiza comentários para quando a PR é criada
+      - name: Find comment for image tags
+        uses: peter-evans/find-comment@v3
+        if: github.event_name == 'pull_request'
+        id: fc
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: 'github-actions[bot]'
+          body-includes: Docker image tag(s) pushed
+      
+        # If PR, put image tags in the PR comments
+      - name: Create or update comment for image tags
+        uses: peter-evans/create-or-update-comment@v4
+        if: github.event_name == 'pull_request'
+        with:
+          comment-id: ${{ steps.fc.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            Docker image tag(s) pushed:
+            ```text
+            ${{ steps.docker_meta.outputs.tags }}
+            ```
+
+            Labels added to images:
+            ```text
+            ${{ steps.docker_meta.outputs.labels }}
+            ```
+          edit-mode: replace
   
