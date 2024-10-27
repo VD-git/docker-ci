@@ -15,7 +15,7 @@ jobs:
 
       # Permite realizar o build de imagens em diversas plataformas para agilizar o processo de build das imagens.
       - name: Set up QEMU (Multi-plataform)
-        uses: docker/setup-qemu-actions@v1
+        uses: docker/setup-qemu-action@v3
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
