@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - "main"
+  pull_request:
 
 permissions:
   pull-requests: write # needed to create and update comments in PRs
