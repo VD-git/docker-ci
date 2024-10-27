@@ -41,5 +41,6 @@ jobs:
           # Coloco o que foi utilizado em cache (Precisa rodar a primeira vez antes de o cache funcionar).
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          platforms: linux/amd64,linux/arm64,linux/arm/v7
           # outputs: ${{ github.event_name == 'pull_request' && 'type=cacheonly' || 'type=registry,push=true' }}
   
