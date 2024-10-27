@@ -42,6 +42,6 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           # Adiciono as multiplataformas que diferentes usuários podem utilizar para versionar as imagens utilizadas.
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          platforms: linux/amd64
           # outputs: ${{ github.event_name == 'pull_request' && 'type=cacheonly' || 'type=registry,push=true' }}
   
