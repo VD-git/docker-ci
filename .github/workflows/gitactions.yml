@@ -33,7 +33,7 @@ jobs:
           tags: victordias94/mlflow:v2,victordias94/mlflow
           # Condiçao para realizar o push, qualquer uma menos o pull request
           push: ${{ github.event_name != 'pull_request' }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          # cache-from: type=gha
+          # cache-to: type=gha,mode=max
           # outputs: ${{ github.event_name == 'pull_request' && 'type=cacheonly' || 'type=registry,push=true' }}
   
