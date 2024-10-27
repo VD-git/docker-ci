@@ -51,15 +51,6 @@ jobs:
             type=ref,event=branch
             type=semver,pattern={{version}}
 
-      # Faz o scan do que está acontecendo para ver se está nos conformes (não bloqueia - vide exit-code: 0)
-      # Para fazer o teste da imagem, note que uma das tags terá que ser o ${{ github.run_id }}
-      - name: Run Trivy for all CVEs (non-blocking)
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: ${{ github.run_id }}
-          exit-code: 0
-          format: table 
-
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
@@ -103,4 +94,13 @@ jobs:
             ${{ steps.docker_meta.outputs.labels }}
             ```
           edit-mode: replace
+
+      # Faz o scan do que está acontecendo para ver se está nos conformes (não bloqueia - vide exit-code: 0)
+      # Para fazer o teste da imagem, note que uma das tags terá que ser o ${{ github.run_id }}
+      - name: Run Trivy for all CVEs (non-blocking)
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{ github.run_id }}
+          exit-code: 0
+          format: table 
   
