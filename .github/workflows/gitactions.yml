@@ -34,7 +34,7 @@ jobs:
       # Para extrair as variáveis de metadata de forma condicional
       - name: Docker metadata
         id: docker_meta
-      - uses: docker/metadata-action@v5
+        uses: docker/metadata-action@v5
         with:
           images: victordias94/mlflow
           flavor: |
