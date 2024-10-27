@@ -19,7 +19,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # Vai permitir o uso do cache para o código ir mais rápido (É o seu BuildKit + Tools do Github Actions)
+      # Vai permitir o uso do cache para o código ir mais rápido (É o seu BuildKit + Tools do Github Actions).
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       #   with:
@@ -32,7 +32,7 @@ jobs:
         with:
           context: .
           tags: victordias94/mlflow:v2,victordias94/mlflow
-          # Condiçao para realizar o push, qualquer uma menos o pull request
+          # Condiçao para realizar o push, qualquer uma menos o pull request.
           push: ${{ github.event_name != 'pull_request' }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
