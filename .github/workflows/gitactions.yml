@@ -97,8 +97,8 @@ jobs:
             ```
           edit-mode: replace
 
-      - name: Wait for 10 seconds
-        run: sleep 10
+      - name: Wait for 30 seconds
+        run: sleep 30
 
       # Faz o scan do que está acontecendo para ver se está nos conformes (não bloqueia - vide exit-code: 0)
       # Para fazer o teste da imagem, note que uma das tags terá que ser o ${{ github.run_id }}
