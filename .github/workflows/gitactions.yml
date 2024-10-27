@@ -31,11 +31,27 @@ jobs:
       #     driver: cloud
       #     endpoint: "victordias94/cloudbuilder"
 
+      # Para extrair as variáveis de metadata de forma condicional
+      - name: Docker metadata
+        id: docker_meta
+      - uses: docker/metadata-action@v5
+        with:
+          images: victordias94/mlflow
+          flavor: |
+            latest=false
+          tags: |
+            type=raw,value=04
+            type=raw,value=latest,enable={{ endsWith(github.ref, github.event.repository.default_branch) }}
+            type=ref,event=pr
+            type=ref,event=branch
+            type=semver,pattern={{version}}
+
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
           context: .
-          tags: victordias94/mlflow:v2,victordias94/mlflow
+          tags: ${{ steps.docker_meta.outputs.tags }}
+          labels: ${{ steps.docker_meta.outputs.labels }}
           # Condiçao para realizar o push, qualquer uma menos o pull request.
           push: ${{ github.event_name != 'pull_request' }}
           # Coloco o que foi utilizado em cache (Precisa rodar a primeira vez antes de o cache funcionar).
