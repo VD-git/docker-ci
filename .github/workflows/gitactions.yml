@@ -8,6 +8,7 @@ on:
 
 permissions:
   pull-requests: write # needed to create and update comments in PRs
+  security-events: write
 
 jobs:
   docker:
@@ -65,6 +66,7 @@ jobs:
           # Adiciono as multiplataformas que diferentes usuários podem utilizar para versionar as imagens utilizadas.
           platforms: linux/amd64
           # outputs: ${{ github.event_name == 'pull_request' && 'type=cacheonly' || 'type=registry,push=true' }}
+          load: true # Export to Docker Engine rather than pushing to a registry
 
       # Automatiza comentários para quando a PR é criada
       - name: Find comment for image tags
@@ -97,10 +99,27 @@ jobs:
 
       # Faz o scan do que está acontecendo para ver se está nos conformes (não bloqueia - vide exit-code: 0)
       # Para fazer o teste da imagem, note que uma das tags terá que ser o ${{ github.run_id }}
-      - name: Run Trivy for all CVEs (non-blocking)
+      # - name: Run Trivy for all CVEs (non-blocking)
+      #   uses: aquasecurity/trivy-action@master
+      #   with:
+      #     image-ref: ${{ github.run_id }}
+      #     exit-code: 0
+      #     format: table
+
+      - name: Run Trivy for HIGH,CRITICAL CVEs and report (blocking)
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: ${{ github.run_id }}
-          exit-code: 0
-          format: table 
+          exit-code: 1
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'HIGH,CRITICAL'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+      
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: 'trivy-results.sarif'
   
