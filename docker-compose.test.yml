@@ -20,4 +20,4 @@ services:
       # postgres:
       #   condition: service_healthy
     # run all your tests here against the allhands22 service
-    command: exit 0
+    command:
