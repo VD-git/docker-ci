@@ -28,6 +28,22 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      # - name: Build and export to Docker (CI)
+      #   uses: docker/build-push-action@v6
+      #   with:
+      #     push: false # Não quero fazer o registro dessa imagem, é só para o teste unitário
+      #     load: true # A mantenho em cache para fazer os testes
+      #     tags: ${{ github.run_id }}
+      #     target: test
+      #     cache-from: type=gha
+      #     cache-to: type=gha,mode=max
+      #     platforms: linux/amd64
+
+      #   # for simple tests (npm test, etc.) just run a local image in docker
+      # - name: Unit Testing in Docker
+      #   run: |
+      #     docker run --rm ${{ github.run_id }} echo "run test commands here"
+
       # Vai permitir o uso do cache para o código ir mais rápido (É o seu BuildKit + Tools do Github Actions).
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -113,7 +129,7 @@ jobs:
       - name: Run Trivy for HIGH,CRITICAL CVEs and report (blocking)
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref:victordias94/mlflow:${{ github.run_id }}
+          image-ref: victordias94/mlflow:${{ github.run_id }}
           exit-code: 0
           ignore-unfixed: true
           vuln-type: 'os,library'
