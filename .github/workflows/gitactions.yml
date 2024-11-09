@@ -63,13 +63,14 @@ jobs:
           cache-to: type=gha,mode=max
           platforms: linux/amd64
 
-        # for simple tests (npm test, etc.) just run a local image in docker
+      # for simple tests (npm test, etc.) just run a local image in docker
       - name: Unit Testing in Docker
         run: |
           container_id=$(docker run -d --rm ${{ github.run_id }})
           sleep 5
           docker stop $container_id
 
+      # faz o teste para validar o commando na sua imagem (troquei para nginx que o mlflow não estava dando exit 2)
       - name: Test healthcheck in Docker Compose
         run: |
           export TESTING_IMAGE="${{ github.run_id }}"
