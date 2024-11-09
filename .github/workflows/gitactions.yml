@@ -55,10 +55,10 @@ jobs:
       - name: Build and export to Docker (CI)
         uses: docker/build-push-action@v6
         with:
+          context: .
           push: false # Não quero fazer o registro dessa imagem, é só para o teste unitário
           load: true # A mantenho em cache para fazer os testes
           tags: ${{ github.run_id }}
-          target: test
           cache-from: type=gha
           cache-to: type=gha,mode=max
           platforms: linux/amd64
