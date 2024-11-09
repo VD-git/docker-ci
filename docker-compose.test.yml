@@ -13,7 +13,7 @@ services:
   #     test: /healthchecks/postgres-healthcheck
   #     interval: "5s"
   sut:
-    image: "${TESTING_IMAGE}"
+    image: nginx #"${TESTING_IMAGE}"
     depends_on:
       allhands22:
         condition: service_started
