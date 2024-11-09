@@ -20,4 +20,9 @@ services:
       # postgres:
       #   condition: service_healthy
     # run all your tests here against the allhands22 service
-    command: curl allhands22:5000 | grep 'MLflow' | wc -l || exit 1
+    command: |
+      if [ $(curl http://0.0.0.0:5001 | grep 'MLflow' | wc -l) -gt 0 ]; then
+        exit 0
+      else
+        exit 1
+      fi
