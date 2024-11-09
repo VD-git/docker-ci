@@ -10,6 +10,7 @@ permissions:
   pull-requests: write # needed to create and update comments in PRs
   security-events: write
   packages: write
+  contents: read
 
 jobs:
   docker:
