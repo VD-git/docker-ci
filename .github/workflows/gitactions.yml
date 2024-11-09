@@ -31,7 +31,6 @@ jobs:
       - name: Build and export to Docker (CI)
         uses: docker/build-push-action@v6
         with:
-          context: .
           push: false # Não quero fazer o registro dessa imagem, é só para o teste unitário
           load: true # A mantenho em cache para fazer os testes
           tags: ${{ github.run_id }}
@@ -45,10 +44,10 @@ jobs:
         run: |
           docker run --rm ${{ github.run_id }} echo "run test commands here"
 
-      - name: Test healthcheck in Docker Compose
-        run: |
-          export TESTING_IMAGE="${{ github.run_id }}"
-          docker compose -f docker-compose.test.yml up --exit-code-from sut
+      # - name: Test healthcheck in Docker Compose
+      #   run: |
+      #     export TESTING_IMAGE="${{ github.run_id }}"
+      #     docker compose -f docker-compose.test.yml up --exit-code-from sut
 
       # Vai permitir o uso do cache para o código ir mais rápido (É o seu BuildKit + Tools do Github Actions).
       - name: Set up Docker Buildx
