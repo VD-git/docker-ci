@@ -52,6 +52,7 @@ jobs:
         with:
           context: .
           push: true
+          # ghcr.io/<git_user_name>/<repo_name> (tem que ser nesse formato, caso contrário não funciona e não acha)
           tags: ghcr.io/vd-git/docker-ci:${{ github.run_id }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
@@ -65,16 +66,16 @@ jobs:
             --no-lb
             --k3s-arg "--no-deploy=traefik,servicelb,metrics-server@server:*"
       
-      # - name: Smoke test deployment in k3d Kubernetes
-      #   run: |
-      #     kubectl create secret docker-registry regcred \
-      #       --docker-server=https://ghcr.io \
-      #       --docker-username=${{ github.actor }} \
-      #       --docker-password=${{ secrets.GITHUB_TOKEN }}
-      #     export TESTING_IMAGE=ghcr.io/victordias94/mlflow:"$GITHUB_RUN_ID"
-      #     envsubst < deployment.yaml  | kubectl apply -f -
-      #     kubectl rollout status deployment myapp
-      #     kubectl exec deploy/myapp -- curl --fail localhost
+      - name: Smoke test deployment in k3d Kubernetes
+        run: |
+          kubectl create secret docker-registry regcred \
+            --docker-server=https://ghcr.io \
+            --docker-username=${{ github.actor }} \
+            --docker-password=${{ secrets.GITHUB_TOKEN }}
+          export TESTING_IMAGE=ghcr.io/vd-git/docker-ci:"$GITHUB_RUN_ID"
+          envsubst < deployment.yaml  | kubectl apply -f -
+          kubectl rollout status deployment myapp
+          kubectl exec deploy/myapp -- curl --fail localhost
 
       # Para extrair as variáveis de metadata de forma condicional
       - name: Docker metadata
