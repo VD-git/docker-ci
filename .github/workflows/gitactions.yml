@@ -49,7 +49,8 @@ jobs:
       - name: Build and Push to GHCR
         uses: docker/build-push-action@v6
         with:
-          push: false
+          context: .
+          push: true
           tags: ghcr.io/victordias94/mlflow:${{ github.run_id }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
